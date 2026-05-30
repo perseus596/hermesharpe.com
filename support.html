@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HermesHarpe — Support &amp; Setup</title>
+<meta name="description" content="Setup help, troubleshooting, and frequently asked questions for HermesHarpe, the native macOS security monitor. First launch, multi-Mac dashboard, quarantine, uninstalling, and refunds." />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="HermesHarpe — Support &amp; Setup" />
+<meta property="og:description" content="Setup help, troubleshooting, and FAQ for HermesHarpe, the native macOS security monitor." />
+<meta property="og:image" content="Hermes Harpe Title for App v4.png" />
+<meta property="og:site_name" content="HermesHarpe" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="HermesHarpe — Support &amp; Setup" />
+<meta name="twitter:image" content="Hermes Harpe Title for App v4.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  --bg: #0a0c12;
+  --bg-raised: #11141d;
+  --bg-card: #12161f;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --text: #e7eaf0;
+  --text-dim: #9aa3b2;
+  --text-faint: #67707f;
+  --blue: #5aa2f0;
+  --teal: #34d3c4;
+  --blue-deep: #2b6fd1;
+  --warm: #c8a06a;
+  --amber: #e0a44a;
+  --red: #e5685f;
+  --green: #46c98b;
+  --maxw: 1120px;
+  --readw: 820px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+.read { max-width: var(--readw); margin: 0 auto; padding: 0 24px; }
+
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; letter-spacing: -0.025em; font-weight: 400; }
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: 500;
+}
+
+/* ---------- Top nav ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10,12,18,0.72);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.nav-brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 600; font-size: 15.5px; color: var(--text); }
+.nav-brand img { width: 28px; height: 28px; border-radius: 7px; }
+.nav-back { color: var(--text-dim); display: inline-flex; align-items: center; gap: 7px; transition: color 0.15s ease; }
+.nav-back:hover { color: var(--text); }
+.nav-back svg { width: 16px; height: 16px; }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 600; font-size: 14.5px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue), var(--blue-deep));
+  padding: 9px 18px; border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 6px 18px -8px rgba(43,111,209,0.55), inset 0 1px 0 rgba(255,255,255,0.18);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.nav-cta:hover { transform: translateY(-1px); filter: brightness(1.06); }
+@media (max-width: 560px) { .nav-cta { display: none; } }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; text-align: center; padding-bottom: 54px; }
+.hero-banner { position: relative; width: 100%; overflow: hidden; background: var(--bg); }
+.hero-banner img {
+  position: relative; z-index: 0;
+  width: 100%;
+  height: clamp(180px, 26vw, 320px);
+  object-fit: cover;
+  object-position: center 40%;
+  filter: brightness(1.12) saturate(1.06);
+}
+.hero-matrix {
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.74) 0%, rgba(0,0,0,0.55) 16%, rgba(0,0,0,0.22) 32%, rgba(0,0,0,0) 46%);
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.74) 0%, rgba(0,0,0,0.55) 16%, rgba(0,0,0,0.22) 32%, rgba(0,0,0,0) 46%);
+}
+.hero-banner::after {
+  content: ""; position: absolute; inset: 0; z-index: 2;
+  background:
+    linear-gradient(to bottom, rgba(10,12,18,0) 38%, rgba(10,12,18,0.65) 78%, var(--bg) 100%),
+    linear-gradient(to right, rgba(10,12,18,0.45), rgba(10,12,18,0) 22%, rgba(10,12,18,0) 78%, rgba(10,12,18,0.45));
+  pointer-events: none;
+}
+.hero .eyebrow { display: block; margin-top: 40px; }
+.hero h1 { font-size: clamp(34px, 5.4vw, 56px); font-weight: 400; margin: 16px auto 0; max-width: 16ch; }
+.hero h1 .accent {
+  background: linear-gradient(120deg, var(--teal), var(--blue));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero .sub { font-size: clamp(16px, 2vw, 19px); color: var(--text-dim); max-width: 56ch; margin: 18px auto 0; text-wrap: pretty; }
+
+/* ---------- Quick-jump chips ---------- */
+.jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 32px; }
+.jump a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-dim);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 8px 15px;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.jump a:hover { color: var(--text); border-color: rgba(52,211,196,0.45); background: rgba(52,211,196,0.06); }
+
+/* ---------- Intro panel ---------- */
+.intro { padding: 16px 0 8px; }
+.intro-panel {
+  position: relative;
+  background:
+    radial-gradient(130% 130% at 0% 0%, rgba(52,211,196,0.07), transparent 55%),
+    var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  padding: 38px 40px;
+}
+.intro-panel .eyebrow { display: block; margin-bottom: 14px; }
+.intro-panel h2 { font-size: clamp(24px, 3.4vw, 32px); margin-bottom: 14px; }
+.intro-panel p { color: var(--text-dim); font-size: 17px; text-wrap: pretty; }
+.monitors { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 22px; }
+.monitors span {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13.5px; font-weight: 500; color: var(--text);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 9px; padding: 8px 13px;
+}
+.monitors span svg { width: 15px; height: 15px; color: var(--teal); flex-shrink: 0; }
+.intro-note { margin-top: 20px; font-size: 14.5px; color: var(--text-faint); display: inline-flex; align-items: center; gap: 8px; }
+.intro-note svg { width: 16px; height: 16px; color: var(--teal); }
+
+/* ---------- FAQ sections ---------- */
+.faq-section { padding: 46px 0 8px; scroll-margin-top: 80px; }
+.faq-section > .read > .sec-head { margin-bottom: 22px; }
+.sec-head { display: flex; align-items: center; gap: 14px; }
+.sec-head .sec-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; color: var(--teal);
+  border: 1px solid rgba(52,211,196,0.3);
+  border-radius: 8px; padding: 5px 9px;
+  flex-shrink: 0;
+}
+.sec-head h2 { font-size: clamp(22px, 3vw, 28px); }
+
+details.faq {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--bg-card), rgba(18,22,31,0.55));
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+details.faq[open] { border-color: var(--border-strong); background: linear-gradient(180deg, #161b26, rgba(18,22,31,0.7)); }
+details.faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 22px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  font-size: 17px; font-weight: 600; color: var(--text);
+  letter-spacing: -0.015em;
+}
+details.faq summary::-webkit-details-marker { display: none; }
+details.faq summary:hover { color: #fff; }
+.faq-chevron {
+  width: 22px; height: 22px; flex-shrink: 0; color: var(--text-faint);
+  transition: transform 0.22s ease, color 0.18s ease;
+}
+details.faq[open] .faq-chevron { transform: rotate(180deg); color: var(--teal); }
+.faq-body { padding: 0 22px 22px; color: var(--text-dim); font-size: 16px; line-height: 1.68; }
+.faq-body p { margin-top: 12px; text-wrap: pretty; }
+.faq-body p:first-child { margin-top: 0; }
+.faq-body strong { color: var(--text); font-weight: 600; }
+.faq-body .path {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  color: var(--blue);
+  background: rgba(90,162,240,0.08);
+  border: 1px solid rgba(90,162,240,0.18);
+  border-radius: 6px; padding: 1px 7px;
+  white-space: nowrap;
+}
+.faq-body ul.clean { list-style: none; margin: 14px 0 0; display: grid; gap: 11px; }
+.faq-body ul.clean li { display: flex; gap: 11px; align-items: flex-start; }
+.faq-body ul.clean li svg { width: 18px; height: 18px; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+
+/* numbered steps */
+ol.steps { list-style: none; counter-reset: step; display: grid; gap: 14px; margin-top: 14px; }
+ol.steps li {
+  position: relative; counter-increment: step;
+  padding-left: 46px;
+  min-height: 30px;
+  padding-top: 3px;
+}
+ol.steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: -2px;
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 500;
+  color: var(--teal);
+  background: rgba(52,211,196,0.08);
+  border: 1px solid rgba(52,211,196,0.28);
+  border-radius: 9px;
+}
+
+/* ---------- Status grid ---------- */
+.status-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 6px; }
+.status-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-card);
+  padding: 22px 22px;
+}
+.status-top { display: flex; align-items: center; gap: 11px; margin-bottom: 10px; }
+.status-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; background: currentColor; box-shadow: 0 0 12px currentColor; }
+.status-card h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+.status-card p { color: var(--text-dim); font-size: 15px; line-height: 1.55; }
+.s-secure { color: var(--green); }
+.s-warning { color: var(--amber); }
+.s-critical { color: var(--red); }
+.s-offline { color: var(--text-faint); }
+.status-card h3 { color: var(--text); }
+
+/* ---------- Specs / refund strips ---------- */
+.strip {
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  background:
+    radial-gradient(130% 130% at 100% 0%, rgba(90,162,240,0.06), transparent 55%),
+    var(--bg-card);
+  padding: 30px 34px;
+  display: flex; align-items: center; gap: 22px;
+}
+.strip .strip-icon {
+  width: 50px; height: 50px; flex-shrink: 0;
+  display: grid; place-items: center;
+  border-radius: 13px;
+  background: radial-gradient(120% 120% at 30% 20%, rgba(52,211,196,0.16), rgba(90,162,240,0.08));
+  border: 1px solid rgba(52,211,196,0.22);
+}
+.strip .strip-icon svg { width: 26px; height: 26px; color: var(--teal); }
+.strip h3 { font-size: 19px; margin-bottom: 5px; }
+.strip p { color: var(--text-dim); font-size: 15.5px; text-wrap: pretty; }
+.strip .badge {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.04em;
+  color: var(--teal); border: 1px solid rgba(52,211,196,0.25);
+  border-radius: 999px; padding: 3px 11px; display: inline-block; margin: 6px 4px 0 0;
+}
+.strip a.inline { color: var(--blue); border-bottom: 1px solid rgba(90,162,240,0.4); }
+.strip a.inline:hover { color: #fff; border-color: #fff; }
+
+/* ---------- Help CTA ---------- */
+.help-cta { padding: 70px 0 20px; text-align: center; }
+.help-cta h2 { font-size: clamp(26px, 3.6vw, 36px); }
+.help-cta p { color: var(--text-dim); margin: 14px auto 0; max-width: 46ch; }
+.help-cta .btn {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 26px;
+  background: linear-gradient(135deg, var(--blue), var(--blue-deep));
+  color: #fff; font-weight: 600; font-size: 17px;
+  padding: 16px 30px; border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 8px 30px -8px rgba(43,111,209,0.55), inset 0 1px 0 rgba(255,255,255,0.18);
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+.help-cta .btn:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.help-cta .btn svg { width: 18px; height: 18px; }
+
+/* ---------- Footer ---------- */
+footer {
+  border-top: 1px solid var(--border);
+  margin-top: 70px;
+  padding: 46px 24px;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 14px;
+  line-height: 1.7;
+}
+footer .foot-icon { width: 34px; height: 34px; border-radius: 9px; margin: 0 auto 16px; opacity: 0.85; }
+footer .foot-links { display: flex; justify-content: center; gap: 22px; margin-bottom: 18px; }
+footer .foot-links a { color: var(--text-dim); transition: color 0.15s ease; }
+footer .foot-links a:hover { color: var(--text); }
+footer .copy { margin-top: 6px; opacity: 0.7; }
+
+@media (max-width: 680px) {
+  .intro-panel { padding: 28px 24px; }
+  .status-grid { grid-template-columns: 1fr; }
+  .strip { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .faq-section { padding-top: 38px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-back" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Back to home
+    </a>
+    <a class="nav-brand" href="index.html">
+      <img src="HermesHarpe ICON Sepia.png" alt="" />
+      HermesHarpe
+    </a>
+    <a class="nav-cta" href="https://mercurial44.gumroad.com/l/hermesharpe">Get it — $39</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" data-screen-label="Support Hero">
+  <div class="hero-banner">
+    <img src="Hermes Harpe Title for App v4.png" alt="HermesHarpe" />
+    <canvas class="hero-matrix" id="heroMatrix" aria-hidden="true"></canvas>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow">Support &amp; Setup</span>
+    <h1>Help getting <span class="accent">HermesHarpe</span> running</h1>
+    <p class="sub">Everything you need to install, set up, and troubleshoot HermesHarpe across all your Macs. Pick a topic below or scroll through.</p>
+    <nav class="jump" aria-label="Jump to a topic">
+      <a href="#first-launch">First launch</a>
+      <a href="#dashboard">Multi-Mac dashboard</a>
+      <a href="#status">Status labels</a>
+      <a href="#alerts">Alerts &amp; audit log</a>
+      <a href="#quarantine">Quarantine</a>
+      <a href="#uninstall">Uninstalling</a>
+      <a href="#requirements">Requirements</a>
+      <a href="#refunds">Refunds</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <div class="read">
+    <div class="intro-panel">
+      <span class="eyebrow">What HermesHarpe does</span>
+      <h2>Around-the-clock monitoring, entirely on your machines</h2>
+      <p>HermesHarpe watches your Mac around the clock and tells you when something suspicious happens. If you have more than one Mac, it shows the status of all of them in one dashboard, synced through your iCloud account. No data goes to any server — everything stays on your machines.</p>
+      <div class="monitors">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18"/></svg>Network connections</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m7 9 2.5 2.5L7 14"/><path d="M13 14h4"/></svg>Background processes</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.3 7 8.7 5 8.7-5"/></svg>New app installs</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m4.9 4.9 2.8 2.8"/><path d="M2 12h4"/><circle cx="12" cy="14" r="4"/></svg>Launch agents</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 7.8 8 9 4.6-1.2 8-4 8-9V5z"/><path d="m9 12 2 2 4-4"/></svg>Malicious file behavior</span>
+      </div>
+      <div class="intro-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        No data leaves your Mac. No accounts. No telemetry.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIRST LAUNCH ============ -->
+<section class="faq-section" id="first-launch">
+  <div class="read">
+    <div class="sec-head"><span class="sec-num">01</span><h2>First launch</h2></div>
+
+    <details class="faq" open>
+      <summary>Where is the app after I install it?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>HermesHarpe does not appear in your Dock. It lives in the <strong>menu bar</strong> — the row of small icons at the top right of your screen. Look for a <strong>shield icon</strong> and click it to open the dashboard.</p>
+        <p>If you do not see the shield icon, the app may not have launched yet. Open your <strong>Applications</strong> folder and double-click HermesHarpe to start it.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>macOS blocked the app when I tried to open it<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>This is normal for apps downloaded outside the App Store. macOS shows a warning even for safe, verified apps. <strong>Do not double-click</strong> the app to open it the first time.</p>
+        <p>Instead:</p>
+        <ul class="clean">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Right-click</strong> the app icon and select <strong>Open</strong> from the menu that appears.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Click <strong>Open</strong> in the dialog box.</span></li>
+        </ul>
+        <p>You only need to do this once. After that, the app opens normally.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>The app asked for permission to do something. What should I say?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>Say <strong>yes to all permission requests</strong> on first launch. HermesHarpe needs these to do its job:</p>
+        <ul class="clean">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Network monitoring</strong> lets the app see what connections your Mac is making. Without it, it cannot detect network threats.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Notifications</strong> let the app alert you when a threat is detected. Without it, you will not receive any alerts.</span></li>
+        </ul>
+        <p>These permissions do <strong>not</strong> give HermesHarpe access to your personal files, photos, messages, or any other private data.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ MULTI-MAC DASHBOARD ============ -->
+<section class="faq-section" id="dashboard">
+  <div class="read">
+    <div class="sec-head"><span class="sec-num">02</span><h2>Multi-Mac dashboard</h2></div>
+
+    <details class="faq">
+      <summary>I installed on two Macs but one shows as Offline<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>First, check that <strong>iCloud Drive is turned on</strong> for the machine showing Offline.</p>
+        <ul class="clean">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>macOS Sonoma:</strong> System Settings → your name at the top → iCloud → iCloud Drive → turn it on.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>macOS Tahoe:</strong> System Settings → your Apple ID at the top → iCloud → iCloud Drive → turn it on.</span></li>
+        </ul>
+        <p>After turning on iCloud Drive, wait <strong>5 minutes</strong> and check the dashboard again. The app writes its status every 5 minutes, so there is always a short delay.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>The dashboard still shows Offline after 5 minutes<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>Make sure HermesHarpe is <strong>actually running</strong> on the other machine. The app must be open in the menu bar to write its status. It does not run in the background unless you add it to <strong>Login Items</strong> (see below).</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>How do I make HermesHarpe start automatically?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>On macOS Sonoma and Tahoe: <strong>System Settings → General → Login Items</strong>, click the <strong>+</strong> button, find HermesHarpe in your Applications folder, then click <strong>Add</strong>.</p>
+        <p>Do this on every Mac where you want it to run automatically.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ STATUS LABELS ============ -->
+<section class="faq-section" id="status">
+  <div class="read">
+    <div class="sec-head"><span class="sec-num">03</span><h2>Understanding the dashboard</h2></div>
+    <p style="color:var(--text-dim); margin: -6px 0 22px; font-size: 16.5px;">Each machine shows one of four status labels. Here is what they mean.</p>
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="status-top"><span class="status-dot s-secure"></span><h3>Secure</h3></div>
+        <p>The machine is online and no unresolved threats have been detected.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-top"><span class="status-dot s-warning"></span><h3>Warning</h3></div>
+        <p>1 to 3 unresolved alerts are waiting for your attention. Go to the Audit Log tab to review them.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-top"><span class="status-dot s-critical"></span><h3>Critical</h3></div>
+        <p>4 or more unresolved alerts are present. Go to the Audit Log tab immediately.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-top"><span class="status-dot s-offline"></span><h3>Offline</h3></div>
+        <p>No status update in the last 24 hours. Either the app is not running on that machine or iCloud Drive is not syncing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ALERTS & AUDIT LOG ============ -->
+<section class="faq-section" id="alerts">
+  <div class="read">
+    <div class="sec-head"><span class="sec-num">04</span><h2>Alerts &amp; the audit log</h2></div>
+
+    <details class="faq">
+      <summary>I am seeing alerts for apps I trust<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>Some alerts are <strong>informational, not confirmed threats</strong>. An alert marked <strong>Suspicious</strong> means the app noticed something worth flagging — it does not mean the app is definitely malicious.</p>
+        <p>If you trust the app that triggered the alert, open the <strong>Whitelist</strong> tab and add it. HermesHarpe will stop alerting you about that app in the future.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>How do I clear alerts from the dashboard?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>Open the <strong>Audit Log</strong> tab. Click each alert and mark it as <strong>resolved</strong>. Once all alerts are resolved, the status changes back to <strong>Secure</strong>.</p>
+        <p>A future update will add a <strong>Clear All</strong> button so you do not have to click each one individually.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>How long is history kept?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>The Audit Log keeps a <strong>complete history of every event with no expiry</strong>. Events are stored locally on your Mac and are not deleted automatically.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ QUARANTINE ============ -->
+<section class="faq-section" id="quarantine">
+  <div class="read">
+    <div class="sec-head"><span class="sec-num">05</span><h2>Quarantine</h2></div>
+
+    <details class="faq">
+      <summary>What does it mean when a file is quarantined?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>When HermesHarpe detects a file it classifies as malicious, it moves the file out of its original location into a secure folder at <span class="path">Library/HermesHarpe/Quarantine</span> on your Mac. The file is then <strong>stripped of all permissions</strong> so it cannot run or be opened. You receive a notification when this happens.</p>
+        <p>The original app or process is also <strong>terminated immediately</strong>.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>I think a file was quarantined by mistake. How do I get it back?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>Open the <strong>Quarantine</strong> tab in the dashboard. Find the entry for the file and click <strong>Restore</strong>. The file will be moved back to its original location and its permissions will be restored.</p>
+        <p>If you are certain the file is safe and want to prevent it from being flagged again, add the app to your <strong>Whitelist</strong> after restoring it.</p>
+      </div>
+    </details>
+
+    <details class="faq">
+      <summary>How do I permanently delete a quarantined file?<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <p>Open the <strong>Quarantine</strong> tab, find the entry, and click <strong>Delete Permanently</strong>. The file will be removed from your Mac entirely. <strong>This cannot be undone.</strong></p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ UNINSTALL ============ -->
+<section class="faq-section" id="uninstall">
+  <div class="read">
+    <div class="sec-head"><span class="sec-num">06</span><h2>Uninstalling HermesHarpe</h2></div>
+    <details class="faq" open>
+      <summary>How to fully remove HermesHarpe from your Mac<svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="faq-body">
+        <ol class="steps">
+          <li><strong>Quit the app</strong> — click the shield icon in the menu bar and select Quit.</li>
+          <li>Open your <strong>Applications</strong> folder and drag HermesHarpe to the Trash.</li>
+          <li>To remove all stored data, open Finder → <strong>Go</strong> in the menu bar → hold the <strong>Option</strong> key → click <strong>Library</strong>, then go to <strong>Containers</strong> and delete the folder that starts with <span class="path">com.paczka</span>.</li>
+          <li><strong>Empty the Trash.</strong></li>
+        </ol>
+        <p>If you installed on multiple Macs, repeat these steps on each machine.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ REQUIREMENTS ============ -->
+<section class="faq-section" id="requirements">
+  <div class="read">
+    <div class="sec-head"><span class="sec-num">07</span><h2>System requirements</h2></div>
+    <div class="strip">
+      <div class="strip-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      </div>
+      <div>
+        <h3>macOS 14 Sonoma or later</h3>
+        <p>Works on both Apple Silicon Macs (M1, M2, M3, M4, M5) and Intel Macs (2019 and later). iCloud Drive is required for multi-machine dashboard sync.</p>
+        <div>
+          <span class="badge">Apple Silicon</span>
+          <span class="badge">Intel 2019+</span>
+          <span class="badge">iCloud Drive</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REFUNDS ============ -->
+<section class="faq-section" id="refunds">
+  <div class="read">
+    <div class="sec-head"><span class="sec-num">08</span><h2>Refunds</h2></div>
+    <div class="strip">
+      <div class="strip-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.4 2.6L3 8"/><path d="M3 3v5h5"/></svg>
+      </div>
+      <div>
+        <h3>30-day money-back guarantee</h3>
+        <p>If HermesHarpe does not work on your Mac, you are entitled to a full refund within 30 days of purchase. To request a refund, go to your <a class="inline" href="https://mercurial44.gumroad.com/l/hermesharpe">Gumroad purchase receipt</a> and use the refund option listed there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <img class="foot-icon" src="HermesHarpe ICON Sepia.png" alt="HermesHarpe" />
+  <div class="foot-links">
+    <a href="index.html">Home</a>
+    <a href="HermesHarpe.html#features">Features</a>
+    <a href="support.html">Support</a>
+    <a href="https://mercurial44.gumroad.com/l/hermesharpe">Buy — $39</a>
+  </div>
+  <div>HermesHarpe is an independent app by Ferenc Paczka. Not affiliated with Apple Inc.</div>
+  <div class="copy">© 2026 Ferenc Paczka. All rights reserved.</div>
+</footer>
+
+<script>
+/* Sepia Matrix rain over the support hero banner */
+(function () {
+  var canvas = document.getElementById('heroMatrix');
+  if (!canvas) return;
+  var banner = canvas.parentElement;
+  var ctx = canvas.getContext('2d');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var glyphs = 'ﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｸﾁｺﾄ0123456789ABCDEFGHZ:."=*+-<>'.split('');
+  var fontSize = 15;
+  var cols = 0, drops = [], dpr = 1, W = 0, H = 0;
+
+  function setup() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = banner.clientWidth; H = banner.clientHeight;
+    if (!W || !H) return;
+    canvas.width = Math.floor(W * dpr); canvas.height = Math.floor(H * dpr);
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.ceil(W / fontSize);
+    drops = [];
+    for (var i = 0; i < cols; i++) drops[i] = Math.floor(Math.random() * -(H / fontSize) - 2);
+    ctx.fillStyle = '#0a0704'; ctx.fillRect(0, 0, W, H);
+  }
+
+  function draw() {
+    ctx.fillStyle = 'rgba(9, 6, 3, 0.11)';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = '600 ' + fontSize + 'px "JetBrains Mono", monospace';
+    ctx.textBaseline = 'top';
+    for (var i = 0; i < cols; i++) {
+      var x = i * fontSize;
+      var y = drops[i] * fontSize;
+      var ch = glyphs[(Math.random() * glyphs.length) | 0];
+      if (y > 0) {
+        ctx.fillStyle = Math.random() > 0.92 ? 'rgba(247, 232, 198, 0.95)' : 'rgba(206, 162, 96, 0.85)';
+        ctx.fillText(ch, x, y);
+        ctx.fillStyle = 'rgba(150, 110, 60, 0.45)';
+        ctx.fillText(glyphs[(Math.random() * glyphs.length) | 0], x, y - fontSize);
+      }
+      drops[i]++;
+      if (y > H && Math.random() > 0.975) drops[i] = Math.floor(Math.random() * -8);
+    }
+  }
+
+  var last = 0, STEP = 55;
+  function loop(t) { if (t - last >= STEP) { draw(); last = t; } requestAnimationFrame(loop); }
+
+  setup();
+  if (reduce) { for (var k = 0; k < 60; k++) draw(); }
+  else { requestAnimationFrame(loop); }
+
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () { setup(); if (reduce) { for (var k = 0; k < 60; k++) draw(); } }, 200);
+  });
+})();
+</script>
+
+</body>
+</html>
